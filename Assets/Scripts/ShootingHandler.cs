@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -10,18 +12,31 @@ public class ShootingHandler : MonoBehaviour
     [SerializeField] private float RPM;
     [Header("Sound")]
     [SerializeField] private AudioSource shootSoundEffect;
+
     [Header("Ammo")]
-    [SerializeField] private TMP_Text ammoText;
-    [SerializeField] private float magzineAmmo;
-    [SerializeField] private float totalAmmo;
-    private float ammo;
+    [SerializeField] private int magzineAmmo;
+    [SerializeField] private int totalAmmo;
+
+    [Header("Weapon Recoil")]
+    [SerializeField] private AnimationCurve weaponPushbackCurve;
+    [SerializeField] private float weaponPushbackMagnitude;
+    [SerializeField] private Transform weapon;
+    private Vector3 baseWeaponOffset;
+
+    public event Action BulletShot;
+    public event Action<int> CurrentAmmoUpdated;
+    public event Action<int> TotalAmmoUpdated;
+
+    private int ammo;
 
     private float timer;
 
     private void Start()
     {
+        baseWeaponOffset = weapon.localPosition;
         ammo = magzineAmmo;
-        UpdateText();
+        CurrentAmmoUpdated?.Invoke(ammo);
+        TotalAmmoUpdated?.Invoke(totalAmmo);
     }
     private void Update()
     {
@@ -38,9 +53,12 @@ public class ShootingHandler : MonoBehaviour
                 shootSoundEffect.Play();
 
                 ammo--;
-                UpdateText();
+
+                StartCoroutine(AnimateWeapon());
 
                 timer = 1f / (RPM / 60.0f);
+                BulletShot?.Invoke();
+                CurrentAmmoUpdated?.Invoke(ammo);
             }
         }
 
@@ -50,14 +68,24 @@ public class ShootingHandler : MonoBehaviour
             var diff = totalAmmo >= needed ? needed : totalAmmo;
             ammo += diff;
             totalAmmo -= diff;
-            UpdateText();
+            CurrentAmmoUpdated?.Invoke(ammo);
+            TotalAmmoUpdated?.Invoke(totalAmmo);
         }
 
         timer -= Time.deltaTime;
     }
 
-    void UpdateText()
+    private IEnumerator AnimateWeapon()
     {
-        ammoText.text = $"Ammo: {ammo} / {totalAmmo}"; ;
-    }
+        float timeSinceShoot = 0.0f;
+        do
+        {
+            print(timeSinceShoot / (RPM / 60.0f));
+            var offset = -(weapon.localRotation * Vector3.forward) * weaponPushbackCurve.Evaluate(timeSinceShoot / (1.0f / (RPM / 60.0f))) * weaponPushbackMagnitude;
+            weapon.localPosition = baseWeaponOffset + offset;
+            timeSinceShoot += Time.deltaTime;
+            yield return null;
+        } while (timeSinceShoot / (1.0f / (RPM / 60.0f)) < 1.0f);
+        weapon.localPosition = baseWeaponOffset;
+    } 
 }
