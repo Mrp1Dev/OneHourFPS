@@ -10,13 +10,9 @@ public class RecoilOnShoot : ShootingBehaviour
     private Quaternion lastRecoilDelta;
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!shootingHandler.Shooting)
         {
             lastRecoilDelta = Quaternion.identity;
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            StartCoroutine(PerformDerecoil());
         }
         if (!Mathf.Approximately(Quaternion.Angle(lastRecoilDelta, Quaternion.identity), 0.0f))
         {

@@ -3,20 +3,20 @@ using UnityEngine;
 
 public class AmmoText : MonoBehaviour
 {
-    [SerializeField] private ShootingHandler shootingHandler;
+    [SerializeField] private AmmoHandler ammoHandler;
     [SerializeField] private TMP_Text text;
     private int lastCurrentAmmo;
     private int lastTotalAmmo;
     private void Awake()
     {
-        shootingHandler.CurrentAmmoUpdated += OnCurrentAmmoUpdate;
-        shootingHandler.TotalAmmoUpdated += OnTotalAmmoUpdate;
+        ammoHandler.CurrentAmmoUpdated += OnCurrentAmmoUpdate;
+        ammoHandler.TotalAmmoUpdated += OnTotalAmmoUpdate;
     }
 
     private void OnDestroy()
     {
-        shootingHandler.CurrentAmmoUpdated -= OnCurrentAmmoUpdate;
-        shootingHandler.TotalAmmoUpdated -= OnTotalAmmoUpdate;
+        ammoHandler.CurrentAmmoUpdated -= OnCurrentAmmoUpdate;
+        ammoHandler.TotalAmmoUpdated -= OnTotalAmmoUpdate;
     }
 
     private void OnCurrentAmmoUpdate(int ammo)

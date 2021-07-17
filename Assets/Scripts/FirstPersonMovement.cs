@@ -11,6 +11,8 @@ public class FirstPersonMovement : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float extraGravity;
     [SerializeField] private LayerMask groundLayer;
+
+    [SerializeField] private float shootingSenstivityMultiplier;
     private Rigidbody rb;
 
     private void Start()
@@ -23,7 +25,7 @@ public class FirstPersonMovement : MonoBehaviour
     private void Update()
     {
         //Rotation
-        float delta = Input.GetAxis(MouseHorizontalAxis) * rotateSpeed;
+        float delta = Input.GetAxis(MouseHorizontalAxis) * rotateSpeed * (Input.GetMouseButton(0) ? shootingSenstivityMultiplier : 1f);
         transform.rotation = Quaternion.Euler(Vector3.up * delta) * transform.rotation;
 
         //Jumping
