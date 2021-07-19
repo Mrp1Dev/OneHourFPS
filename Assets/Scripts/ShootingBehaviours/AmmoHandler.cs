@@ -18,7 +18,7 @@ public class AmmoHandler : ShootingBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(reloadKey))
         {
             var needed = magzineAmmo - Ammo;
             var diff = totalAmmo >= needed ? needed : totalAmmo;

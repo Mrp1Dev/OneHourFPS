@@ -1,12 +1,24 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletShotDecalHandler : ShootingBehaviour
 {
     [SerializeField] private GameObject decalPrefab;
+    [SerializeField] private int maxDecals;
+    private Queue<GameObject> spawnedDecals = new Queue<GameObject>();
+
+    private void Start()
+    {
+        //PoolingManager.Instance.Prewarm(decalPrefab, maxDecals);
+    }
 
     protected override void OnBulletHit(RaycastHit hit)
     {
         var offset = Random.Range(0.03f, 0.05f);
-        Instantiate(decalPrefab, hit.point + hit.normal * offset, Quaternion.LookRotation(-hit.normal), hit.transform);
+        spawnedDecals.Enqueue(PoolingManager.Instance.GetFromPool(decalPrefab, hit.point + hit.normal * offset, Quaternion.LookRotation(-hit.normal), hit.transform));
+        if(spawnedDecals.Count > maxDecals)
+        {
+           PoolingManager.Instance.ReturnToPool(spawnedDecals.Dequeue());
+        }
     }
 }

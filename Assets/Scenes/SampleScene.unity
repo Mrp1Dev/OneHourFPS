@@ -1183,6 +1183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingHandler: {fileID: 762294503}
   decalPrefab: {fileID: 8439577244168996882, guid: f85eaed13bdd1234c97a60987c15f52b, type: 3}
+  maxDecals: 20
 --- !u!1 &794253941
 GameObject:
   m_ObjectHideFlags: 0
