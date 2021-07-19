@@ -959,7 +959,7 @@ MonoBehaviour:
   layersToIgnore:
     serializedVersion: 2
     m_Bits: 256
-  RPM: 600
+  RPM: 350
   ammoHandler: {fileID: 762294507}
 --- !u!82 &762294504
 AudioSource:
@@ -1133,14 +1133,41 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.09870395
-      value: 0.99678975
+      time: 0.1017023
+      value: 0.99915105
       inSlope: 0.12617572
       outSlope: 0.12617572
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.07302611
+    - serializedVersion: 3
+      time: 0.30609706
+      value: 0.71361786
+      inSlope: -2.3491979
+      outSlope: -2.3491979
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.20497394
+    - serializedVersion: 3
+      time: 0.50038886
+      value: 0.3608106
+      inSlope: -2.0386314
+      outSlope: -2.0386314
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.3412509
+    - serializedVersion: 3
+      time: 0.6611191
+      value: 0.070586115
+      inSlope: -0.7138562
+      outSlope: -0.7138562
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.1870393
     - serializedVersion: 3
       time: 1.0015259
       value: -0.0041389465
@@ -1912,6 +1939,53 @@ Transform:
   - {fileID: 1322962406}
   - {fileID: 1864846176}
   m_Father: {fileID: 1434820961}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1090499310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1090499312}
+  - component: {fileID: 1090499311}
+  m_Layer: 0
+  m_Name: '[PoolingManager]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1090499311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090499310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a46d04ef545f874baa848d02c63a269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inactiveObjectsParent: {fileID: 1090499312}
+  poolsToPrewarm:
+  - prefab: {fileID: 8439577244168996882, guid: f85eaed13bdd1234c97a60987c15f52b, type: 3}
+    count: 20
+--- !u!4 &1090499312
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090499310}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1275562499
