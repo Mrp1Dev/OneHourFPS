@@ -7,11 +7,6 @@ public class BulletShotDecalHandler : ShootingBehaviour
     [SerializeField] private int maxDecals;
     private Queue<GameObject> spawnedDecals = new Queue<GameObject>();
 
-    private void Start()
-    {
-        //PoolingManager.Instance.Prewarm(decalPrefab, maxDecals);
-    }
-
     protected override void OnBulletHit(RaycastHit hit)
     {
         var offset = Random.Range(0.03f, 0.05f);

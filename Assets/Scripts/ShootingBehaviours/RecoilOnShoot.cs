@@ -6,7 +6,6 @@ public class RecoilOnShoot : ShootingBehaviour
     [SerializeField] private Vector2 minRecoil;
     [SerializeField] private Vector2 maxRecoil;
     [SerializeField] private float constantDeRecoilSpeed;
-    [SerializeField] private float nonShootingDeRecoilSpeed;
     private Quaternion lastRecoilDelta;
     private void Update()
     {
@@ -19,17 +18,6 @@ public class RecoilOnShoot : ShootingBehaviour
             var newRot = Quaternion.RotateTowards(transform.localRotation, Quaternion.Inverse(lastRecoilDelta) * transform.localRotation, constantDeRecoilSpeed * Time.deltaTime);
             lastRecoilDelta = (Quaternion.Inverse(transform.localRotation) * newRot) * lastRecoilDelta;
             transform.localRotation = newRot;
-        }
-    }
-
-    private IEnumerator PerformDerecoil()
-    {
-        while(!Mathf.Approximately(Quaternion.Angle(lastRecoilDelta, Quaternion.identity), 0.0f))
-        {
-            var newRot = Quaternion.RotateTowards(transform.localRotation, Quaternion.Inverse(lastRecoilDelta) * transform.localRotation, nonShootingDeRecoilSpeed * Time.deltaTime);
-            lastRecoilDelta = (Quaternion.Inverse(transform.localRotation) * newRot) * lastRecoilDelta;
-            transform.localRotation = newRot;
-            yield return null;
         }
     }
 

@@ -14,11 +14,11 @@ public class ShootingHandler : MonoBehaviour
     private float timer;
 
     public float DelayPerBullet => 1.0f / (RPM / 60.0f);
-    public bool Shooting => Input.GetMouseButton(0);
+    public bool Shooting => Input.GetMouseButton(0) && ammoHandler.Ammo > 0;
    
     private void Update()
     {
-        if (Input.GetMouseButton(0) && ammoHandler.Ammo > 0)
+        if (Shooting)
         {
             if (timer <= 0.0f)
             {
