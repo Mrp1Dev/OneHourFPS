@@ -1,7 +1,7 @@
 using UnityEngine;
-
+using Mirror;
 [RequireComponent(typeof(Rigidbody))]
-public class FirstPersonMovement : MonoBehaviour
+public class FirstPersonMovement : NetworkBehaviour
 {
     const string HorizontalAxis = "Horizontal";
     const string VerticalAxis = "Vertical";
@@ -15,7 +15,7 @@ public class FirstPersonMovement : MonoBehaviour
     [SerializeField] private float shootingSenstivityMultiplier;
     private Rigidbody rb;
 
-    private void Start()
+    public override void OnStartLocalPlayer()
     {
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
@@ -24,6 +24,7 @@ public class FirstPersonMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!hasAuthority) return;
         //Rotation
         float delta = Input.GetAxis(MouseHorizontalAxis) * rotateSpeed * (Input.GetMouseButton(0) ? shootingSenstivityMultiplier : 1f);
         transform.rotation = Quaternion.Euler(Vector3.up * delta) * transform.rotation;
@@ -35,10 +36,12 @@ public class FirstPersonMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
+
     }
 
     private void FixedUpdate()
     {
+        if (!hasAuthority) return;
         Vector3 movementVector = Vector3.zero;
         movementVector.x = Input.GetAxisRaw(HorizontalAxis);
         movementVector.z = Input.GetAxisRaw(VerticalAxis);
