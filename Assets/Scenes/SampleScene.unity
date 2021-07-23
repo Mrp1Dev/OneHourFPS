@@ -1063,7 +1063,7 @@ MonoBehaviour:
   CongestionWindow: 0
   SendWindowSize: 4096
   ReceiveWindowSize: 4096
-  debugLog: 0
+  debugLog: 1
   statisticsGUI: 0
   statisticsLog: 0
 --- !u!114 &925834386

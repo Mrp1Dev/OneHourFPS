@@ -15,8 +15,9 @@ public class FirstPersonMovement : NetworkBehaviour
     [SerializeField] private float shootingSenstivityMultiplier;
     private Rigidbody rb;
 
-    public override void OnStartLocalPlayer()
+    private void Start()
     {
+        if (!hasAuthority) return;
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
