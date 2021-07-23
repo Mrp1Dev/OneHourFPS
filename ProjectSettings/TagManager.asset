@@ -13,8 +13,8 @@ TagManager:
   - UI
   - Hittable
   - Ground
-  - Character
-  - 
+  - LocalCharacter
+  - MPCharacter
   - 
   - 
   - 
