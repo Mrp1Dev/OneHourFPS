@@ -12,4 +12,5 @@ public class UnscaledChild : MonoBehaviour
         scaleTmp.y /= transform.parent.localScale.z;
         transform.localScale = scaleTmp;
     }
+
 }
