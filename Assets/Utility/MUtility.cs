@@ -38,10 +38,24 @@ namespace MUtility
 
         public static bool IsInLayerMask(this GameObject go, LayerMask layerMask) => ((1 << go.layer) & layerMask) != 0;
 
+        public static void SetLayerIncludingChildren(this GameObject go, int layerIndex)
+        {
+            go.layer = layerIndex;
+            for (int i = 0; i < go.transform.childCount; i++)
+            {
+                go.transform.GetChild(i).gameObject.SetLayerIncludingChildren(layerIndex);
+            }
+        }
+
         //-------------NORMAL FUNCTIONS---------------
 
         public static bool Approx(float a, float b, float tolerance = 0.01f) => Mathf.Abs(a - b) <= tolerance;
-
+        public static int MaskToIndex(LayerMask mask)
+        {
+            var res = Mathf.Log((float) mask.value, 2f);
+            if (res % 1.0f > Mathf.Epsilon) Debug.LogError("MUtils.MaskToIndex expects a layermask which only has one layer ticked. Layermask provided has more than one layer.");
+            return Mathf.RoundToInt(res);
+        }
         private static IEnumerator DelayInternal(Action action, float delay, bool realtime)
         {
             if (realtime)

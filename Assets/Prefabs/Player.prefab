@@ -539,7 +539,6 @@ MonoBehaviour:
   multiplayerCharacterLayer:
     serializedVersion: 2
     m_Bits: 512
-  gun: {fileID: 541674152899404784}
 --- !u!114 &5688571235001369959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -779,15 +778,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1db7b8afb39fc694caee70984b778313, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.05
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1db7b8afb39fc694caee70984b778313, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.05
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1db7b8afb39fc694caee70984b778313, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.05
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1db7b8afb39fc694caee70984b778313, type: 3}
       propertyPath: m_LocalPosition.x
@@ -830,6 +829,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7260670978388350112, guid: 1db7b8afb39fc694caee70984b778313, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7260670978388350112, guid: 1db7b8afb39fc694caee70984b778313, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 79599d302992508499edf9f588fde258, type: 2}
@@ -840,6 +843,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1db7b8afb39fc694caee70984b778313, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436660411053202543, guid: 1db7b8afb39fc694caee70984b778313, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4436660411053202543, guid: 1db7b8afb39fc694caee70984b778313, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -855,11 +862,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1db7b8afb39fc694caee70984b778313, type: 3}
---- !u!1 &541674152899404784 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1db7b8afb39fc694caee70984b778313, type: 3}
-  m_PrefabInstance: {fileID: 812055395045039777}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &923160310081403210 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1db7b8afb39fc694caee70984b778313, type: 3}

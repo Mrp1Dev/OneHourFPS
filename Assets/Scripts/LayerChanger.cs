@@ -1,19 +1,26 @@
 using UnityEngine;
 using Mirror;
+using MUtility;
 public class LayerChanger : NetworkBehaviour 
 {
     [Tooltip("DO NOT SET THIS TO MORE THAN ONE LAYER.")]
     [SerializeField] private LayerMask localCharacterLayer;
     [Tooltip("DO NOT SET THIS TO MORE THAN ONE LAYER.")]
     [SerializeField] private LayerMask multiplayerCharacterLayer;
-    [SerializeField] private GameObject gun;
-    private void OnPreRender()
+    
+    private void Start()
     {
-        var layer = hasAuthority ? MaskToIndex(localCharacterLayer) : MaskToIndex(multiplayerCharacterLayer);
-        gameObject.layer = layer;
-        
-        if (gun) gun.layer = layer;
+        Camera.onPreRender += OnPreRenderCallback;
     }
 
-    private int MaskToIndex(LayerMask mask) => Mathf.RoundToInt(Mathf.Log((float)mask.value, 2f));
+    private void OnDestroy()
+    {
+        Camera.onPreRender -= OnPreRenderCallback;
+    }
+    private void OnPreRenderCallback(Camera _)
+    {
+        var layer = hasAuthority ? MUtils.MaskToIndex(localCharacterLayer) : MUtils.MaskToIndex(multiplayerCharacterLayer);
+        gameObject.SetLayerIncludingChildren(layer);
+    }
+
 }
