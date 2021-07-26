@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Mirror;
 //Using aliases to make the script easier to understand
 using Pool = System.Collections.Generic.Queue<UnityEngine.GameObject>;
 using Prefab = UnityEngine.GameObject;

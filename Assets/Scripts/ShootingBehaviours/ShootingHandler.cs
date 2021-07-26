@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
 using UnityEngine;
-
-public class ShootingHandler : MonoBehaviour
+using Mirror;
+public class ShootingHandler : NetworkBehaviour
 {
     [SerializeField] private Transform cam;
     [SerializeField] private LayerMask layersToIgnore;
@@ -14,10 +13,11 @@ public class ShootingHandler : MonoBehaviour
     private float timer;
 
     public float DelayPerBullet => 1.0f / (RPM / 60.0f);
-    public bool Shooting => Input.GetMouseButton(0) && ammoHandler.Ammo > 0;
+    public bool Shooting => Input.GetMouseButton(0) && ammoHandler.Ammo > 0 && hasAuthority;
    
     private void Update()
     {
+        if (!hasAuthority) return;
         if (Shooting)
         {
             if (timer <= 0.0f)
