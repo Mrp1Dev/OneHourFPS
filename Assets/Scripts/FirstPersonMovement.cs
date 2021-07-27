@@ -27,7 +27,7 @@ public class FirstPersonMovement : NetworkBehaviour
     {
         if (!hasAuthority) return;
         //Rotation
-        float delta = Input.GetAxis(MouseHorizontalAxis) * rotateSpeed * (Input.GetMouseButton(0) ? shootingSenstivityMultiplier : 1f);
+        float delta = Input.GetAxis(MouseHorizontalAxis) * rotateSpeed * (Input.GetMouseButton(0) ? shootingSenstivityMultiplier : 1f) * (Cursor.visible ? 0f : 1f);
         transform.rotation = Quaternion.Euler(Vector3.up * delta) * transform.rotation;
 
         //Jumping
@@ -36,6 +36,14 @@ public class FirstPersonMovement : NetworkBehaviour
         if (grounded && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+
+
+        //temporary
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            Cursor.lockState = Cursor.lockState != CursorLockMode.None ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = !Cursor.visible;
         }
 
     }

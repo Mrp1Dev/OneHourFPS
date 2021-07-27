@@ -19,15 +19,23 @@ public class PlayerHealthHandler : NetworkBehaviour
         HealthUpdated?.Invoke(newHealth);
     }
 
+
+    [TargetRpc]
+    private void QuitGame(NetworkConnection target)
+    {
+        Application.Quit();
+    }
+
     [Command(requiresAuthority = false)]
     private void CmdTakeDamage(GameObject player, int damage)
     {
         var handler = player.GetComponent<PlayerHealthHandler>();
         handler.currentHealth -= damage;
-        CallHealthUpdate(handler.GetComponent<NetworkIdentity>().connectionToClient, handler.currentHealth);
+        var connection = handler.GetComponent<NetworkIdentity>().connectionToClient;
+        CallHealthUpdate(connection, handler.currentHealth);
         if (handler.currentHealth <= 0)
         {
-            NetworkServer.Destroy(gameObject);
+            QuitGame(connection);
         }
     }
 }

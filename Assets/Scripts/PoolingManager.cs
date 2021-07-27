@@ -29,7 +29,7 @@ public class PoolingManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("An Instnace of this singleton already exists, destroying current one.");
+            Debug.LogWarning("An Instanace of this singleton already exists, destroying current one.");
             Destroy(this);
         }
 
